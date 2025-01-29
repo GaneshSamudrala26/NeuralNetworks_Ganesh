@@ -55,3 +55,16 @@ print(f"Number of Employees: {Employee.employee_count}")
 print(f"Average Salary of Fulltime Employees: {FulltimeEmployee.average_salary()}")
 print(f"Number of Fulltime Employees: {FulltimeEmployee.ft_employee_count}")
 
+import numpy as np
+
+# Create random vector of size 20 with floats in the range 1-20
+random_vector = np.random.uniform(1, 20, 20)
+
+# Reshape the array to 4 by 5
+reshaped_array = random_vector.reshape(4, 5)
+
+# Replace the max in each row by 0
+reshaped_array[reshaped_array == reshaped_array.max(axis=1, keepdims=True)] = 0
+
+reshaped_array
+
