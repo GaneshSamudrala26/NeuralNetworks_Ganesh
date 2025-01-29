@@ -48,3 +48,30 @@ print(f"Average Salary for FullTimeEmployee: {average_salary_fulltime_employee}"
 
 # Print the total count of employees
 print(f"Total Employees: {Employee.employee_count}")
+
+
+
+
+# Program2
+import numpy as np
+
+# numpy array with random values in 4 by 5 size
+randNumArray = np.random.uniform(low=1, high=20, size=(4,5))
+
+# finding the indices with maximum values
+maxIndices = np.argmax(randNumArray, axis=1)
+
+# finding the row indices
+rowIndices = np.arange(randNumArray.shape[0])
+
+# finding the exact positions of maximium valuesin the array
+positionIndices = np.array([rowIndices, maxIndices])
+
+# to convert the array into an array of flat indices
+linearIndices = np.ravel_multi_index(positionIndices, randNumArray.shape)
+
+# reshaping the linear array into multi dimensionanl array
+randNumArray.reshape((-1))[linearIndices] = 0
+
+print(randNumArray)
+     
