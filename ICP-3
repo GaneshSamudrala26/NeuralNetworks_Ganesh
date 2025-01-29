@@ -1,1 +1,33 @@
+# import modules
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
+# upload the file
+file_name = 'data.csv'
+# read the data_set
+df = pd.read_csv(file_name)
+
+# e. Aggregate at least two columns in the dataset using min, max, count, and mean functions
+e = df.iloc[:, -2:].agg(['max', 'min', 'count', 'mean'])
+
+# f.Filter the dataframe to retain only the rows with calorie values falling between 500 and 1000.
+f = df[df['Calories'].between(500, 1000)]
+
+# g. Filter the dataframe to choose rows where calorie values are greater than 500 and pulse values are less than 100.
+g = df[(df['Calories'] > 500) & (df['Pulse'] < 100)]
+
+# h.Generate a new dataframe named "df_modified" that includes all columns from the original dataframe "df" except for the column "Maxpulse."
+df_modified = df.drop('Maxpulse', axis=1)
+
+# i. Remove the "Maxpulse" column from the main dataframe "df."
+df = df.drop(['Maxpulse'], axis=1)
+
+# j. Change the data type of the "Calories" column to integer in the dataframe.
+df['Calories'] = pd.to_numeric(df['Calories'], errors='coerce').fillna(0).astype(int)
+
+# k. Using pandas create a scatter plot for the two columns (Duration and Calories).
+df.plot()
+df.plot(kind='scatter', x='Duration', y='Calories')
+     
