@@ -1,70 +1,50 @@
+#Program 1
 class Employee:
+    # Class variable to count the number of employees
     employee_count = 0
-    total_salary = 0
 
     def __init__(self, name, family, salary, department):
+        # Instance variables
         self.name = name
         self.family = family
         self.salary = salary
         self.department = department
+
+        # Increment the employee count when a new employee is created
         Employee.employee_count += 1
-        Employee.total_salary += salary
 
-    @classmethod
-    def average_salary(cls):
-        if cls.employee_count > 0:
-            return cls.total_salary / cls.employee_count
-        return 0
+    def average_salary(self, *salaries):
+        # Calculate and return the average salary
+        total_salary = sum(salaries) + self.salary
+        num_employees = len(salaries) + 1  # Include the current instance
+        return total_salary / num_employees
 
-    def display_employee(self):
-        return f"Employee: {self.name}, Department: {self.department}, Salary: {self.salary}"
 
-class FulltimeEmployee(Employee):
-    ft_employee_count = 0
-    ft_total_salary = 0
+class FullTimeEmployee(Employee):
+    # Additional properties for FullTimeEmployee can be added here
 
-    def __init__(self, name, family, salary, department):
+    def __init__(self, name, family, salary, department, fulltime_property):
+        # Call the constructor of the base class (Employee)
         super().__init__(name, family, salary, department)
-        FulltimeEmployee.ft_employee_count += 1
-        FulltimeEmployee.ft_total_salary += salary
 
-    @classmethod
-    def average_salary(cls):
-        if cls.ft_employee_count > 0:
-            return cls.ft_total_salary / cls.ft_employee_count
-        return 0
+        # Additional property specific to FullTimeEmployee
+        self.fulltime_property = fulltime_property
 
-    def display_employee(self):
-        return f"Fulltime Employee: {self.name}, Department: {self.department}, Salary: {self.salary}"
 
-# Creating instances
-emp1 = Employee("harsha", "karthik", 60000, "HR")
-emp2 = Employee("harsha", "karthik", 70000, "Finance")
-ft_emp1 = FulltimeEmployee("Alice", "Smith", 80000, "IT")
-ft_emp2 = FulltimeEmployee("karthik", "harsha", 90000, "Marketing")
+# Create instances of Employee class
+employee1 = Employee("Priyanka p", "Family1", 50000, "HR")
+employee2 = Employee("Jessica e", "Family2", 60000, "IT")
 
-# Displaying information
-print(emp1.display_employee())
-print(emp2.display_employee())
-print(ft_emp1.display_employee())
-print(ft_emp2.display_employee())
+# Call the average_salary function for Employee class
+average_salary_employee = employee1.average_salary(employee2.salary)
+print(f"Average Salary for Employees: {average_salary_employee}")
 
-# Displaying average salaries and counts
-print(f"Average Salary of Employees: {Employee.average_salary()}")
-print(f"Number of Employees: {Employee.employee_count}")
-print(f"Average Salary of Fulltime Employees: {FulltimeEmployee.average_salary()}")
-print(f"Number of Fulltime Employees: {FulltimeEmployee.ft_employee_count}")
+# Create instances of FullTimeEmployee class
+fulltime_employee = FullTimeEmployee("Alice", "Family3", 70000, "Finance", "FullTimeProperty")
 
-import numpy as np
+# Call the average_salary function for FullTimeEmployee class
+average_salary_fulltime_employee = fulltime_employee.average_salary()
+print(f"Average Salary for FullTimeEmployee: {average_salary_fulltime_employee}")
 
-# Create random vector of size 20 with floats in the range 1-20
-random_vector = np.random.uniform(1, 20, 20)
-
-# Reshape the array to 4 by 5
-reshaped_array = random_vector.reshape(4, 5)
-
-# Replace the max in each row by 0
-reshaped_array[reshaped_array == reshaped_array.max(axis=1, keepdims=True)] = 0
-
-reshaped_array
-
+# Print the total count of employees
+print(f"Total Employees: {Employee.employee_count}")
