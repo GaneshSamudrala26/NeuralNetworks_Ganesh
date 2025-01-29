@@ -1,1 +1,57 @@
+class Employee:
+    employee_count = 0
+    total_salary = 0
+
+    def __init__(self, name, family, salary, department):
+        self.name = name
+        self.family = family
+        self.salary = salary
+        self.department = department
+        Employee.employee_count += 1
+        Employee.total_salary += salary
+
+    @classmethod
+    def average_salary(cls):
+        if cls.employee_count > 0:
+            return cls.total_salary / cls.employee_count
+        return 0
+
+    def display_employee(self):
+        return f"Employee: {self.name}, Department: {self.department}, Salary: {self.salary}"
+
+class FulltimeEmployee(Employee):
+    ft_employee_count = 0
+    ft_total_salary = 0
+
+    def __init__(self, name, family, salary, department):
+        super().__init__(name, family, salary, department)
+        FulltimeEmployee.ft_employee_count += 1
+        FulltimeEmployee.ft_total_salary += salary
+
+    @classmethod
+    def average_salary(cls):
+        if cls.ft_employee_count > 0:
+            return cls.ft_total_salary / cls.ft_employee_count
+        return 0
+
+    def display_employee(self):
+        return f"Fulltime Employee: {self.name}, Department: {self.department}, Salary: {self.salary}"
+
+# Creating instances
+emp1 = Employee("harsha", "karthik", 60000, "HR")
+emp2 = Employee("harsha", "karthik", 70000, "Finance")
+ft_emp1 = FulltimeEmployee("Alice", "Smith", 80000, "IT")
+ft_emp2 = FulltimeEmployee("karthik", "harsha", 90000, "Marketing")
+
+# Displaying information
+print(emp1.display_employee())
+print(emp2.display_employee())
+print(ft_emp1.display_employee())
+print(ft_emp2.display_employee())
+
+# Displaying average salaries and counts
+print(f"Average Salary of Employees: {Employee.average_salary()}")
+print(f"Number of Employees: {Employee.employee_count}")
+print(f"Average Salary of Fulltime Employees: {FulltimeEmployee.average_salary()}")
+print(f"Number of Fulltime Employees: {FulltimeEmployee.ft_employee_count}")
 
